@@ -52,7 +52,7 @@
   </ToleranceRangeChecks>
   <Rules>
     <Rule Name="RuleLowerFalling" LHS="Trend" Op="EQ" RHS="Falling" ActionIfTrue="RetLowAction" ElseAction="null"/>
-    <Rule Name="RuleLowerNoTrend" LHS="Trend" Op="EQ" RHS="NoTrend" ActionIfTrue="RetLowAction" ElseAct:ion="null"/>
+    <Rule Name="RuleLowerNoTrend" LHS="Trend" Op="EQ" RHS="NoTrend" ActionIfTrue="RetLowAction" ElseAction="null"/>
     <Rule Name="RuleLowerRaising" LHS="Trend" Op="EQ" RHS="Raising" ActionIfTrue="RetMediumAction" ElseAction="null"/>
     <Rule Name="RuleInZoneFalling" LHS="Trend" Op="EQ" RHS="Falling" ActionIfTrue="RetLowAction" ElseAction="null"/>
     <Rule Name="RuleInZoneNoTrend" LHS="Trend" Op="EQ" RHS="NoTrend" ActionIfTrue="RetMediumAction" ElseAction="null"/>
