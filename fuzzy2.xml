@@ -1,0 +1,105 @@
+<!-- Policy Definition XML file: Fuzzy Logic PDL -->
+<!-- Application: Temperature Control -->
+<PolicySuite PolicyType="Temperature Control">
+        <EnvironmentVariables>
+                <EVariable Name="E" Type="real"/>
+                <EVariable Name="DE" Type="real"/>
+        </EnvironmentVariables>
+        <OutputVariables>
+                <OVariable Name="DU" Type="real"/>
+        </OutputVariables>
+        <ReturnValues>
+                <ReturnValue Name="Out" Value="DU" />
+        </ReturnValues>
+        <LinguisticVariables>
+                <LVar Name="Error" Type="Input"/>
+                        <MembershipFunctions>
+                                <MF Name="Minus" Type="Mamdani" Value="-6,-6,-3,-1"/>
+                                <MF Name="SmallMinus" Type="Mamdani" Value="-4,-3,-2,-1"/>
+                                <MF Name="Zero" Type="Mamdani" Value="-2,0,0,2"/>
+                                <MF Name="SmallPlus" Type="Mamdani" Value="1,2,3,4"/>
+                                <MF Name="Plus" Type="Mamdani" Value="1,3,6,6"/>
+                        </MembershipFunctions>
+                </LVar>
+                <LVar Name="ErrorChange" Type="Input"/>
+                        <MembershipFunctions>
+                                <MF Name="Minus" Type="Mamdani" Value="-6,-6,-3,-1"/>
+                                <MF Name="SmallMinus" Type="Mamdani" Value="-4,-3,-2,-1"/>
+                                <MF Name="Zero" Type="Mamdani" Value="-2,0,0,2"/>
+                                <MF Name="SmallPlus" Type="Mamdani" Value="1,2,3,4"/>
+                                <MF Name="Plus" Type="Mamdani" Value="1,3,6,6"/>
+                        </MembershipFunctions>
+                </LVar>
+                <LVar Name="ControlChange" Type="Output"/>
+                        <MembershipFunctions>
+                                <MF Name="Minus" Type="Mamdani" Value="-6,-6,-3,-1"/>
+                                <MF Name="SmallMinus" Type="Mamdani" Value="-4,-3,-2,-1"/>
+                                <MF Name="Zero" Type="Mamdani" Value="-2,0,0,2"/>
+                                <MF Name="SmallPlus" Type="Mamdani" Value="1,2,3,4"/>
+                                <MF Name="Plus" Type="Mamdani" Value="1,3,6,6"/>
+                        </MembershipFunctions>
+                </LVar>
+        </LinguisticVariables>
+        <Actions>
+                <Action Name="Logic">
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule1"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule2"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule3"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule4"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule5"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule6"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule7"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule8"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule9"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule10"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule11"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule12"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule13"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule14"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule15"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule16"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule17"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule18"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule19"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule20"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule21"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule22"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule23"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule24"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule25"/>
+                        <Return ReturnValue="Out"/>
+                </Action>
+        </Actions>
+        <FuzzyRules>
+                <FuzzyRule Name="FuzzyRule1" LVar="E|Error" Op="IS" MF="Minus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Minus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Minus"/>
+                <FuzzyRule Name="FuzzyRule2" LVar="E|Error" Op="IS" MF="Minus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="SmallMinus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Minus"/>
+                <FuzzyRule Name="FuzzyRule3" LVar="E|Error" Op="IS" MF="Minus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Zero" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="SmallMinus"/>
+                <FuzzyRule Name="FuzzyRule4" LVar="E|Error" Op="IS" MF="Minus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="SmallPlus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="SmallMinus"/>
+                <FuzzyRule Name="FuzzyRule5" LVar="E|Error" Op="IS" MF="Minus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Plus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Zero"/>
+                <FuzzyRule Name="FuzzyRule6" LVar="E|Error" Op="IS" MF="SmallMinus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Minus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Minus"/>
+                <FuzzyRule Name="FuzzyRule7" LVar="E|Error" Op="IS" MF="SmallMinus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="SmallMinus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="SmallMinus"/>
+                <FuzzyRule Name="FuzzyRule8" LVar="E|Error" Op="IS" MF="SmallMinus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Zero" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="SmallMinus"/>
+                <FuzzyRule Name="FuzzyRule9" LVar="E|Error" Op="IS" MF="SmallMinus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="SmallPlus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Zero"/>
+                <FuzzyRule Name="FuzzyRule10" LVar="E|Error" Op="IS" MF="SmallMinus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Plus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="SmallPlus"/>
+                <FuzzyRule Name="FuzzyRule11" LVar="E|Error" Op="IS" MF="Zero" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Minus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Minus"/>
+                <FuzzyRule Name="FuzzyRule12" LVar="E|Error" Op="IS" MF="Zero" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="SmallMinus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="SmallMinus"/>
+                <FuzzyRule Name="FuzzyRule13" LVar="E|Error" Op="IS" MF="Zero" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Zero" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Zero"/>
+                <FuzzyRule Name="FuzzyRule14" LVar="E|Error" Op="IS" MF="Zero" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="SmallPlus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="SmallPlus"/>
+                <FuzzyRule Name="FuzzyRule15" LVar="E|Error" Op="IS" MF="Zero" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Plus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Plus"/>
+                <FuzzyRule Name="FuzzyRule16" LVar="E|Error" Op="IS" MF="SmallPlus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Minus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="SmallMinus"/>
+                <FuzzyRule Name="FuzzyRule17" LVar="E|Error" Op="IS" MF="SmallPlus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="SmallMinus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Zero"/>
+                <FuzzyRule Name="FuzzyRule18" LVar="E|Error" Op="IS" MF="SmallPlus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Zero" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="SmallPlus"/>
+                <FuzzyRule Name="FuzzyRule19" LVar="E|Error" Op="IS" MF="SmallPlus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="SmallPlus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="SmallPlus"/>
+                <FuzzyRule Name="FuzzyRule20" LVar="E|Error" Op="IS" MF="SmallPlus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Plus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Plus"/>
+                <FuzzyRule Name="FuzzyRule21" LVar="E|Error" Op="IS" MF="Plus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Minus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Zero"/>
+                <FuzzyRule Name="FuzzyRule22" LVar="E|Error" Op="IS" MF="Plus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="SmallMinus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="SmallPlus"/>
+                <FuzzyRule Name="FuzzyRule23" LVar="E|Error" Op="IS" MF="Plus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Zero" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="SmallPlus"/>
+                <FuzzyRule Name="FuzzyRule24" LVar="E|Error" Op="IS" MF="Plus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="SmallPlus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Plus"/>
+                <FuzzyRule Name="FuzzyRule25" LVar="E|Error" Op="IS" MF="Plus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Plus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Plus"/>
+        </FuzzyRules>
+        <Policies>
+                <Policy Name="Policy1" PolicyType="FLPolicy">
+                        <Execute Action="Logic"/>
+                </Policy>
+        </Policies>
+</PolicySuite>
