@@ -1,0 +1,67 @@
+<!-- Policy Definition XML file: Fuzzy Logic PDL -->
+<!-- Application: Temperature Control -->
+<PolicySuite PolicyType="Temperature Control">
+        <EnvironmentVariables>
+                <EVariable Name="E" Type="real"/>
+                <EVariable Name="DE" Type="real"/>
+        </EnvironmentVariables>
+        <OutputVariables>
+                <OVariable Name="DU" Type="real"/>
+        </OutputVariables>
+        <ReturnValues>
+                <ReturnValue Name="Out" Value="DU" />
+        </ReturnValues>
+        <LinguisticVariables>
+                <LVar Name="Error" Type="Input"/>
+                        <MembershipFunctions>
+                                <MF Name="Minus" Type="Mamdani" Value="-3,-3,-2,0"/>
+                                <MF Name="Zero" Type="Mamdani" Value="-2,0,0,2"/>
+                                <MF Name="Plus" Type="Mamdani" Value="0,2,3,3"/>
+                        </MembershipFunctions>
+                </LVar>
+                <LVar Name="ErrorChange" Type="Input"/>
+                        <MembershipFunctions>
+                                <MF Name="Minus" Type="Mamdani" Value="-3,-3,-2,0"/>
+                                <MF Name="Zero" Type="Mamdani" Value="-2,0,0,2"/>
+                                <MF Name="Plus" Type="Mamdani" Value="0,2,3,3"/>
+                        </MembershipFunctions>
+                </LVar>
+                <LVar Name="ControlChange" Type="Output"/>
+                        <MembershipFunctions>
+                                <MF Name="Minus" Type="Mamdani" Value="-6,-6,-2,0"/>
+                                <MF Name="Zero" Type="Mamdani" Value="-4,0,0,4"/>
+                                <MF Name="Plus" Type="Mamdani" Value="0,2,6,6"/>
+                        </MembershipFunctions>
+                </LVar>
+        </LinguisticVariables>
+        <Actions>
+                <Action Name="Logic">
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule1"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule2"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule3"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule4"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule5"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule6"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule7"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule8"/>
+                        <EvaluateFuzzyRule FuzzyRule="FuzzyRule9"/>
+                        <Return ReturnValue="Out"/>
+                </Action>
+        </Actions>
+        <FuzzyRules>
+                <FuzzyRule Name="FuzzyRule1" LVar="E|Error" Op="IS" MF="Minus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Minus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Minus"/>
+                <FuzzyRule Name="FuzzyRule2" LVar="E|Error" Op="IS" MF="Minus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Zero" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Minus"/>
+                <FuzzyRule Name="FuzzyRule3" LVar="E|Error" Op="IS" MF="Minus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Plus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Zero"/>
+                <FuzzyRule Name="FuzzyRule4" LVar="E|Error" Op="IS" MF="Zero" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Minus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Minus"/>
+                <FuzzyRule Name="FuzzyRule5" LVar="E|Error" Op="IS" MF="Zero" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Zero" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Zero"/>
+                <FuzzyRule Name="FuzzyRule6" LVar="E|Error" Op="IS" MF="Zero" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Plus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Plus"/>
+                <FuzzyRule Name="FuzzyRule7" LVar="E|Error" Op="IS" MF="Plus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Minus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Zero"/>
+                <FuzzyRule Name="FuzzyRule8" LVar="E|Error" Op="IS" MF="Plus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Zero" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Plus"/>
+                <FuzzyRule Name="FuzzyRule9" LVar="E|Error" Op="IS" MF="Plus" LOp="AND" LVar="DE|ErrorChange" Op="IS" MF="Plus" LOp="THEN" LVar="DU|ControlChange" Op="IS" MF="Plus"/>
+        </FuzzyRules>
+        <Policies>
+                <Policy Name="Policy1" PolicyType="FLPolicy">
+                        <Execute Action="Logic"/>
+                </Policy>
+        </Policies>
+</PolicySuite>
