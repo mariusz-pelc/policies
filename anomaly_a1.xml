@@ -1,0 +1,71 @@
+<!-- Policy Definition XML file: Policy Language version 1.2 -->
+<!-- Application: Anomaly Detection System -->
+<PolicySuite PolicyType="Anomaly Detection">
+  <EnvironmentVariables>
+    <EVariable Name="Trend" Type="string"/>
+    <EVariable Name="FLRisk" Type="real">
+  </EnvironmentVariables>
+  <InternalVariables>
+    <IVariable Name="FLRiskReference" Type="real"/>
+  </InternalVariables>
+  <Templates>
+    <Template Name="T1">
+      <Assign Variable="FLRiskReference" Value="0.5"/>
+    </Template>
+  </Templates>
+  <ReturnValues>
+    <ReturnValue Name="OverallRiskLow" Value="0"/>
+    <ReturnValue Name="OverallRiskMedium" Value="1"/>
+    <ReturnValue Name="OverallRiskHigh" Value="2"/>
+  </ReturnValues>
+  <Actions>
+    <Action Name="Start">
+      <EvaluateTRC TRC="RiskLevelTRC"/>
+    </Action>
+    <Action Name="AInZone">
+      <EvaluateRule Rule="RuleInZoneNoTrend"/>
+      <EvaluateRule Rule="RuleInZoneRaising"/>
+      <EvaluateRule Rule="RuleInZoneFalling"/>
+    </Action>
+    <Action Name="ALower">
+      <EvaluateRule Rule="RuleLowerNoTrend"/>
+      <EvaluateRule Rule="RuleLowerRaising"/>
+      <EvaluateRule Rule="RuleLowerFalling"/>
+    </Action>
+    <Action Name="AHigher">
+      <EvaluateRule Rule="RuleHigherNoTrend"/>
+      <EvaluateRule Rule="RuleHigherRaising"/>
+      <EvaluateRule Rule="RuleHigherFalling"/>
+    </Action>
+    <Action Name="RetLowAction">
+      <Return ReturnValue="OverallRiskLow"/>
+    </Action>
+    <Action Name="RetMediumAction">
+      <Return ReturnValue="OverallRiskMedium"/>
+    </Action>
+    <Action Name="RetHighAction">
+      <Return ReturnValue="OverallRiskHigh"/>
+    </Action>
+  </Actions>
+  <ToleranceRangeChecks>
+    <TRC Name="RiskLevelTRC" Check="FLRisk" Compare="FLRiskReference" Tolerance="0.2" ActionInZone="AInZone" ActionLower="ALower" ActionHigher="AHigher" />
+  </ToleranceRangeChecks>
+  <Rules>
+    <Rule Name="RuleLowerFalling" LHS="Trend" Op="EQ" RHS="Falling" ActionIfTrue="RetLowAction" ElseAction="null"/>
+    <Rule Name="RuleLowerNoTrend" LHS="Trend" Op="EQ" RHS="NoTrend" ActionIfTrue="RetLowAction" ElseAct:ion="null"/>
+    <Rule Name="RuleLowerRaising" LHS="Trend" Op="EQ" RHS="Raising" ActionIfTrue="RetMediumAction" ElseAction="null"/>
+    <Rule Name="RuleInZoneFalling" LHS="Trend" Op="EQ" RHS="Falling" ActionIfTrue="RetLowAction" ElseAction="null"/>
+    <Rule Name="RuleInZoneNoTrend" LHS="Trend" Op="EQ" RHS="NoTrend" ActionIfTrue="RetMediumAction" ElseAction="null"/>
+    <Rule Name="RuleInZoneRaising" LHS="Trend" Op="EQ" RHS="Raising" ActionIfTrue="RetHighAction" ElseAction="null"/>
+    <Rule Name="RuleHigherFalling" LHS="Trend" Op="EQ" RHS="Fallling" ActionIfTrue="RetLowAction" ElseAction="null"/>
+    <Rule Name="RuleHigherNoTrend" LHS="Trend" Op="EQ" RHS="NoTrend" ActionIfTrue="RetHighAction" ElseAction="null"/>
+    <Rule Name="RuleHigherRaising" LHS="Trend" Op="EQ" RHS="Raising" ActionIfTrue="RetHighAction" ElseAction="null"/>
+  </Rules>
+  <Policies>
+    <Policy Name="Policy1" PolicyType="NormalPolicy">
+      <Load Template="T1"/>
+      <Execute Action="Start"/>
+    </Policy>
+  </Policies>
+</PolicySuite>
+
